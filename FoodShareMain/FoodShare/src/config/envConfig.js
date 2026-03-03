@@ -14,23 +14,23 @@ const ENV = {
   
   // API configuration
   API: {
-    // Local development (uses MSW for mocking API)
+    // Local development (uses local Spring Boot backend)
     development: {
       BASE_URL: 'http://localhost:8080/api/v1',  // Local Spring Boot backend
-      TIMEOUT: 15000, // 10 seconds
+      TIMEOUT: 15000, // 15 seconds
       MOCK_ENABLED: false
     },
     
     // Staging environment
     staging: {
-      BASE_URL: 'https://staging-api.foodshare.example.com/api/v1',
+      BASE_URL: 'https://foodsharemain-production.up.railway.app/api/v1',
       TIMEOUT: 15000, // 15 seconds
       MOCK_ENABLED: false
     },
     
-    // Production environment
+    // Production environment (Railway backend)
     production: {
-      BASE_URL: 'https://api.foodshare.example.com/api/v1',
+      BASE_URL: 'https://foodsharemain-production.up.railway.app/api/v1',
       TIMEOUT: 20000, // 20 seconds
       MOCK_ENABLED: false
     }
