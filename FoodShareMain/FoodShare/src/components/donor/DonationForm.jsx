@@ -25,6 +25,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { format } from 'date-fns';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config/apiConfig';
 
 const DonationForm = ({ onSubmit }) => {
   // Form state
@@ -48,10 +49,21 @@ const DonationForm = ({ onSubmit }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('/api/v1/categories/food');
+        const response = await axios.get(`${API_BASE_URL}/categories/food`);
         setCategories(response.data);
       } catch (err) {
         console.error('Error fetching food categories:', err);
+        // Fallback to default categories if API fails
+        setCategories([
+          { value: 'fruits_vegetables', label: 'Fruits & Vegetables' },
+          { value: 'grains_cereals', label: 'Grains & Cereals' },
+          { value: 'dairy', label: 'Dairy Products' },
+          { value: 'bakery', label: 'Bakery Items' },
+          { value: 'cooked_meals', label: 'Cooked Meals' },
+          { value: 'canned_food', label: 'Canned Food' },
+          { value: 'beverages', label: 'Beverages' },
+          { value: 'other', label: 'Other' }
+        ]);
       }
     };
     
@@ -153,7 +165,7 @@ const DonationForm = ({ onSubmit }) => {
       <Grid container spacing={3}>
         {/* Main form error */}
         {errors.submit && (
-          <Grid item xs={12}>
+          <Grid size={12}>
             <Alert severity="error">{errors.submit}</Alert>
           </Grid>
         )}
@@ -171,7 +183,7 @@ const DonationForm = ({ onSubmit }) => {
         </Snackbar>
         
         {/* Food Name */}
-        <Grid item xs={12} sm={6}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <TextField
             name="food_name"
             label="Food Name"
@@ -186,7 +198,7 @@ const DonationForm = ({ onSubmit }) => {
         </Grid>
         
         {/* Food Type */}
-        <Grid item xs={12} sm={6}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <FormControl fullWidth required error={Boolean(errors.food_type)}>
             <InputLabel>Food Type</InputLabel>
             <Select
@@ -206,7 +218,7 @@ const DonationForm = ({ onSubmit }) => {
         </Grid>
         
         {/* Quantity */}
-        <Grid item xs={12} sm={6}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <TextField
             name="quantity"
             label="Quantity"
@@ -222,7 +234,7 @@ const DonationForm = ({ onSubmit }) => {
         </Grid>
         
         {/* Quantity Unit */}
-        <Grid item xs={12} sm={6}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <FormControl fullWidth>
             <InputLabel>Unit</InputLabel>
             <Select
@@ -242,34 +254,26 @@ const DonationForm = ({ onSubmit }) => {
         </Grid>
         
         {/* Expiry Date */}
-        <Grid item xs={12} sm={6}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
               label="Expiry Date"
               value={formData.expiry_date}
               onChange={handleDateChange}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  fullWidth
-                  required
-                  error={Boolean(errors.expiry_date)}
-                  helperText={errors.expiry_date}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <CalendarIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              )}
+              slotProps={{
+                textField: {
+                  fullWidth: true,
+                  required: true,
+                  error: Boolean(errors.expiry_date),
+                  helperText: errors.expiry_date
+                }
+              }}
             />
           </LocalizationProvider>
         </Grid>
         
         {/* Image URL */}
-        <Grid item xs={12} sm={6}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <TextField
             name="image_url"
             label="Image URL (Optional)"
@@ -288,7 +292,7 @@ const DonationForm = ({ onSubmit }) => {
         </Grid>
         
         {/* Pickup Address */}
-        <Grid item xs={12}>
+        <Grid size={12}>
           <TextField
             name="pickup_address"
             label="Pickup Address"
@@ -312,7 +316,7 @@ const DonationForm = ({ onSubmit }) => {
         </Grid>
         
         {/* Submit Button */}
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
             <Button
               component={motion.button}

@@ -8,9 +8,9 @@ export default defineConfig({
     port: 2025,
     cors: true,
     proxy: {
-      // Proxy all API requests to the external server
+      // Proxy all API requests to local Spring Boot server
       '/api/v1': {
-        target: 'https://kvfdgmhh-2016.inc1.devtunnels.ms',
+        target: 'http://localhost:8080',
         changeOrigin: true,
         secure: false,
         headers: {

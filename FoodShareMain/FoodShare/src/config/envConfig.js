@@ -1,9 +1,5 @@
 /**
- * Environm    // Local development (uses MSW for mocking API)
-    development: {
-      BASE_URL: '/api/v1',  // Changed to relative URL for proxy support
-      TIMEOUT: 10000, // 10 seconds
-      MOCK_ENABLED: trueonfiguration for FoodShare application
+ * Environment Configuration for FoodShare application
  * This file centralizes environment-specific settings
  */
 import { env } from '../utils/environmentUtils';
@@ -20,9 +16,9 @@ const ENV = {
   API: {
     // Local development (uses MSW for mocking API)
     development: {
-      BASE_URL: 'https://kvfdgmhh-2016.inc1.devtunnels.ms/api/v1',  // Using relative URL for proxy support
+      BASE_URL: 'http://localhost:8080/api/v1',  // Local Spring Boot backend
       TIMEOUT: 15000, // 10 seconds
-      MOCK_ENABLED: true
+      MOCK_ENABLED: false
     },
     
     // Staging environment

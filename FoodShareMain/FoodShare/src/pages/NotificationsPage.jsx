@@ -48,7 +48,8 @@ const PageTitle = styled(motion.div)(({ theme }) => ({
   textAlign: 'center',
 }));
 
-const NotificationCard = styled(motion(Card))(({ theme, isRead }) => ({
+const MotionCard = motion.create(Card);
+const NotificationCard = styled(MotionCard)(({ theme, isRead }) => ({
   marginBottom: theme.spacing(2),
   borderRadius: theme.shape.borderRadius,
   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',

@@ -476,14 +476,14 @@ const DonorDashboardPage = () => {
             transition={{ duration: 0.5 }}
           >
             {activeSection === 'dashboard' && (
-              <Grid container spacing={3}>                <Grid item xs={12}>
+              <Grid container spacing={3}>                <Grid size={12}>
                   <Typography variant="h4" component="h1" gutterBottom>
                     Welcome back, {userData?.name ? userData.name.split(' ')[0] : 'User'}!
                   </Typography>
                 </Grid>
                 
                 {/* Quick summary cards */}
-                <Grid item xs={12} md={4}>
+                <Grid size={{ xs: 12, md: 4 }}>
                   <Paper 
                     elevation={2} 
                     sx={{ 
@@ -503,7 +503,7 @@ const DonorDashboardPage = () => {
                   </Paper>
                 </Grid>
                 
-                <Grid item xs={12} md={4}>
+                <Grid size={{ xs: 12, md: 4 }}>
                   <Paper 
                     elevation={2} 
                     sx={{ 
@@ -523,7 +523,7 @@ const DonorDashboardPage = () => {
                   </Paper>
                 </Grid>
                 
-                <Grid item xs={12} md={4}>
+                <Grid size={{ xs: 12, md: 4 }}>
                   <Paper 
                     elevation={2} 
                     sx={{ 
@@ -544,7 +544,7 @@ const DonorDashboardPage = () => {
                 </Grid>
                 
                 {/* Recent donations section */}
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Paper 
                     elevation={2} 
                     sx={{ 
@@ -577,14 +577,14 @@ const DonorDashboardPage = () => {
             
             {activeSection === 'donations' && (
               <Grid container spacing={3}>
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Typography variant="h4" component="h1" gutterBottom>
                     My Donations
                   </Typography>
                 </Grid>
                 
                 {/* Donation form */}
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Paper 
                     elevation={2} 
                     sx={{ 
@@ -600,7 +600,7 @@ const DonorDashboardPage = () => {
                 </Grid>
                 
                 {/* Donations list */}
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Paper 
                     elevation={2} 
                     sx={{ 
@@ -623,13 +623,13 @@ const DonorDashboardPage = () => {
             
             {activeSection === 'impact' && (
               <Grid container spacing={3}>
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Typography variant="h4" component="h1" gutterBottom>
                     Your Impact
                   </Typography>
                 </Grid>
                 
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <ImpactMetrics data={impactData} />
                 </Grid>
               </Grid>
@@ -637,13 +637,13 @@ const DonorDashboardPage = () => {
             
             {activeSection === 'rewards' && (
               <Grid container spacing={3}>
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Typography variant="h4" component="h1" gutterBottom>
                     Rewards Program
                   </Typography>
                 </Grid>
                 
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Rewards data={rewardsData} onRedeem={handleRedeemReward} />
                 </Grid>
               </Grid>

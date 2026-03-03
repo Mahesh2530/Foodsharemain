@@ -25,6 +25,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { API_BASE_URL } from '../config/apiConfig';
 
 // Styled components
 const FormContainer = styled(Paper)(({ theme }) => ({
@@ -123,7 +124,7 @@ const RegisterPage = () => {
     address: '',
     city: '',
     state: '',
-    postalCode: '',
+    postal_code: '',
     country: '',
     latitude: '',
     longitude: '',
@@ -187,7 +188,8 @@ const RegisterPage = () => {
     
     try {
       // Handle the API call
-      const response = await axios.post('https://kvfdgmhh-2016.inc1.devtunnels.ms/api/v1/users/register', formData);      // After registration, store user data using authUtils
+      const response = await axios.post(`${API_BASE_URL}/users/register`, formData);
+      // After registration, store user data using authUtils
       const userData = {
         user_id: response.data.user_id,
         username: response.data.username,
@@ -322,7 +324,7 @@ const RegisterPage = () => {
                 <Box component="form" onSubmit={handleSubmit} noValidate>
                   <Grid container spacing={isMobile ? 2 : 3}>
                     {/* Username */}
-                    <Grid item xs={12} component={motion.div} custom={0} variants={formItemVariants}>
+                    <Grid size={12} component={motion.div} custom={0} variants={formItemVariants}>
                       <StyledTextField
                         name="username"
                         label="Username"
@@ -336,7 +338,7 @@ const RegisterPage = () => {
                     </Grid>
                     
                     {/* Email */}
-                    <Grid item xs={12} component={motion.div} custom={1} variants={formItemVariants}>
+                    <Grid size={12} component={motion.div} custom={1} variants={formItemVariants}>
                       <StyledTextField
                         name="email"
                         label="Email"
@@ -351,7 +353,7 @@ const RegisterPage = () => {
                     </Grid>
                     
                     {/* Password */}
-                    <Grid item xs={12} component={motion.div} custom={2} variants={formItemVariants}>
+                    <Grid size={12} component={motion.div} custom={2} variants={formItemVariants}>
                       <StyledTextField
                         name="password_hash"
                         label="Password"
@@ -366,7 +368,7 @@ const RegisterPage = () => {
                     </Grid>
                     
                     {/* Role Selection */}
-                    <Grid item xs={12} component={motion.div} custom={3} variants={formItemVariants}>
+                    <Grid size={12} component={motion.div} custom={3} variants={formItemVariants}>
                       <FormControl fullWidth error={Boolean(errors.role)}>
                         <InputLabel id="role-label">Role</InputLabel>
                         <Select
@@ -392,7 +394,7 @@ const RegisterPage = () => {
                     </Grid>
                     
                     {/* Phone */}
-                    <Grid item xs={12} sm={6} component={motion.div} custom={4} variants={formItemVariants}>
+                    <Grid size={{ xs: 12, sm: 6 }} component={motion.div} custom={4} variants={formItemVariants}>
                       <StyledTextField
                         name="phone"
                         label="Phone"
@@ -403,7 +405,7 @@ const RegisterPage = () => {
                     </Grid>
                     
                     {/* Address */}
-                    <Grid item xs={12} component={motion.div} custom={5} variants={formItemVariants}>
+                    <Grid size={12} component={motion.div} custom={5} variants={formItemVariants}>
                       <StyledTextField
                         name="address"
                         label="Address"
@@ -414,7 +416,7 @@ const RegisterPage = () => {
                     </Grid>
                     
                     {/* City */}
-                    <Grid item xs={12} sm={6} component={motion.div} custom={6} variants={formItemVariants}>
+                    <Grid size={{ xs: 12, sm: 6 }} component={motion.div} custom={6} variants={formItemVariants}>
                       <StyledTextField
                         name="city"
                         label="City"
@@ -425,7 +427,7 @@ const RegisterPage = () => {
                     </Grid>
                     
                     {/* State */}
-                    <Grid item xs={12} sm={6} component={motion.div} custom={7} variants={formItemVariants}>
+                    <Grid size={{ xs: 12, sm: 6 }} component={motion.div} custom={7} variants={formItemVariants}>
                       <StyledTextField
                         name="state"
                         label="State/Province"
@@ -436,7 +438,7 @@ const RegisterPage = () => {
                     </Grid>
                     
                     {/* Postal Code */}
-                    <Grid item xs={12} sm={6} component={motion.div} custom={8} variants={formItemVariants}>
+                    <Grid size={{ xs: 12, sm: 6 }} component={motion.div} custom={8} variants={formItemVariants}>
                       <StyledTextField
                         name="postal_code"
                         label="Postal Code"
@@ -447,7 +449,7 @@ const RegisterPage = () => {
                     </Grid>
                     
                     {/* Country */}
-                    <Grid item xs={12} sm={6} component={motion.div} custom={9} variants={formItemVariants}>
+                    <Grid size={{ xs: 12, sm: 6 }} component={motion.div} custom={9} variants={formItemVariants}>
                       <StyledTextField
                         name="country"
                         label="Country"
@@ -458,14 +460,14 @@ const RegisterPage = () => {
                     </Grid>
                     
                     {/* Geolocation */}
-                    <Grid item xs={12} component={motion.div} custom={10} variants={formItemVariants}>
+                    <Grid size={12} component={motion.div} custom={10} variants={formItemVariants}>
                       <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 2 }}>
                         {formData.latitude && formData.longitude 
                           ? "Location detected successfully." 
                           : "We'll auto-detect your location if enabled."}
                       </Typography>
                       <Grid container spacing={2}>
-                        <Grid item xs={6}>
+                        <Grid size={6}>
                           <StyledTextField
                             name="latitude"
                             label="Latitude"
@@ -478,7 +480,7 @@ const RegisterPage = () => {
                             }}
                           />
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid size={6}>
                           <StyledTextField
                             name="longitude"
                             label="Longitude"
@@ -495,7 +497,7 @@ const RegisterPage = () => {
                     </Grid>
                     
                     {/* Submit Button */}
-                    <Grid item xs={12} component={motion.div} custom={11} variants={formItemVariants}>
+                    <Grid size={12} component={motion.div} custom={11} variants={formItemVariants}>
                       <Box textAlign="center">
                         <SubmitButton
                           type="submit"
@@ -509,7 +511,7 @@ const RegisterPage = () => {
                     </Grid>
                     
                     {/* Login Link */}
-                    <Grid item xs={12} component={motion.div} custom={12} variants={formItemVariants}>
+                    <Grid size={12} component={motion.div} custom={12} variants={formItemVariants}>
                       <Box textAlign="center">
                         <Typography variant="body2">
                           Already have an account? <LoginLink href="/login">Login</LoginLink>

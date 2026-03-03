@@ -2,6 +2,8 @@
 package com.klef.sdp.backendproject.controller;
 
 import com.klef.sdp.backendproject.dto.*;
+import com.klef.sdp.backendproject.model.Users;
+import com.klef.sdp.backendproject.repository.UsersRepository;
 import com.klef.sdp.backendproject.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,21 @@ import java.util.Map;
 public class AdminController {
     @Autowired
     private AdminService adminService;
+    
+    @Autowired
+    private UsersRepository usersRepository;
+
+    // Simple endpoint to get all users for admin dashboard
+    @GetMapping("/users")
+    public ResponseEntity<?> getAllUsers() {
+        try {
+            List<Users> users = usersRepository.findAll();
+            return ResponseEntity.ok(users);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(500).body("Failed to Get Users: " + e.getMessage());
+        }
+    }
 
     @GetMapping()
     public ResponseEntity<?> listAllUsers(@RequestParam String userId) {

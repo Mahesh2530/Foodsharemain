@@ -71,6 +71,7 @@ import {
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import { mockDonations, mockUsers, mockAdminAnalytics } from '../mocks/mockData';
+import { API_BASE_URL } from '../config/apiConfig';
 
 // Define drawer width for sidebar
 const drawerWidth = 240;
@@ -110,7 +111,7 @@ const AdminDashboardPage = () => {
       setLoading(true);
       try {
         // Fetch users (which includes both donors and beneficiaries)
-        const usersResponse = await axios.get('/api/v1/admin/users');
+        const usersResponse = await axios.get(`${API_BASE_URL}/admin/users`);
         const users = usersResponse.data || [];
         
         // Separate users into donors and beneficiaries
@@ -118,10 +119,10 @@ const AdminDashboardPage = () => {
         const beneficiariesList = users.filter(user => user.role === 'beneficiary');
         
         // Fetch donations
-        const donationsResponse = await axios.get('/api/v1/donations');
+        const donationsResponse = await axios.get(`${API_BASE_URL}/donations`);
         
         // Fetch analytics data
-        const analyticsResponse = await axios.get('https://kvfdgmhh-2016.inc1.devtunnels.ms/api/v1/admin/analytics?userId=' + adminId);
+        const analyticsResponse = await axios.get(`${API_BASE_URL}/admin/analytics?userId=` + adminId);
         
         // Update state with fetched data
         setDonors(donorsList);
@@ -526,14 +527,14 @@ const AdminDashboardPage = () => {
           >
             {activeSection === 'dashboard' && (
               <Grid container spacing={3}>
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Typography variant="h4" component="h1" gutterBottom>
                     Platform Overview
                   </Typography>
                 </Grid>
                 
                 {/* Stats cards */}
-                <Grid item xs={12} md={3}>
+                <Grid size={{ xs: 12, md: 3 }}>
                   <Paper 
                     elevation={2} 
                     sx={{ 
@@ -556,7 +557,7 @@ const AdminDashboardPage = () => {
                   </Paper>
                 </Grid>
                 
-                <Grid item xs={12} md={3}>
+                <Grid size={{ xs: 12, md: 3 }}>
                   <Paper 
                     elevation={2} 
                     sx={{ 
@@ -579,7 +580,7 @@ const AdminDashboardPage = () => {
                   </Paper>
                 </Grid>
                 
-                <Grid item xs={12} md={3}>
+                <Grid size={{ xs: 12, md: 3 }}>
                   <Paper 
                     elevation={2} 
                     sx={{ 
@@ -602,7 +603,7 @@ const AdminDashboardPage = () => {
                   </Paper>
                 </Grid>
                 
-                <Grid item xs={12} md={3}>
+                <Grid size={{ xs: 12, md: 3 }}>
                   <Paper 
                     elevation={2} 
                     sx={{ 
@@ -626,7 +627,7 @@ const AdminDashboardPage = () => {
                 </Grid>
                 
                 {/* Recent activity section */}
-                <Grid item xs={12} md={8}>
+                <Grid size={{ xs: 12, md: 8 }}>
                   <Paper 
                     elevation={2} 
                     sx={{ 
@@ -685,7 +686,7 @@ const AdminDashboardPage = () => {
                 </Grid>
                 
                 {/* Quick actions card */}
-                <Grid item xs={12} md={4}>
+                <Grid size={{ xs: 12, md: 4 }}>
                   <Paper 
                     elevation={2} 
                     sx={{ 
@@ -745,7 +746,7 @@ const AdminDashboardPage = () => {
             
             {activeSection === 'users' && (
               <Grid container spacing={3}>
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Typography variant="h4" component="h1" gutterBottom>
                       User Management
@@ -771,7 +772,7 @@ const AdminDashboardPage = () => {
                   </Box>
                 </Grid>
                 
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Paper sx={{ borderRadius: 3 }}>
                     <Tabs
                       value={userTabValue}
@@ -837,7 +838,7 @@ const AdminDashboardPage = () => {
             
             {activeSection === 'donations' && (
               <Grid container spacing={3}>
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Typography variant="h4" component="h1" gutterBottom>
                       Donations Management
@@ -876,7 +877,7 @@ const AdminDashboardPage = () => {
                   </Box>
                 </Grid>
                 
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Paper sx={{ borderRadius: 3 }}>
                     <TableContainer>
                       <Table>
@@ -946,7 +947,7 @@ const AdminDashboardPage = () => {
             
             {activeSection === 'requests' && (
               <Grid container spacing={3}>
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Typography variant="h4" component="h1" gutterBottom>
                       Food Requests
@@ -985,7 +986,7 @@ const AdminDashboardPage = () => {
                   </Box>
                 </Grid>
                 
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Paper sx={{ borderRadius: 3 }}>
                     <TableContainer>
                       <Table>
@@ -1043,13 +1044,13 @@ const AdminDashboardPage = () => {
             
             {activeSection === 'settings' && (
               <Grid container spacing={3}>
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Typography variant="h4" component="h1" gutterBottom>
                     Platform Settings
                   </Typography>
                 </Grid>
                 
-                <Grid item xs={12} md={6}>
+                <Grid size={{ xs: 12, md: 6 }}>
                   <Paper sx={{ p: 3, borderRadius: 3 }}>
                     <Typography variant="h5" component="h2" gutterBottom>
                       General Settings
@@ -1100,7 +1101,7 @@ const AdminDashboardPage = () => {
                   </Paper>
                 </Grid>
                 
-                <Grid item xs={12} md={6}>
+                <Grid size={{ xs: 12, md: 6 }}>
                   <Paper sx={{ p: 3, borderRadius: 3 }}>
                     <Typography variant="h5" component="h2" gutterBottom>
                       Notification Settings
@@ -1148,29 +1149,29 @@ const AdminDashboardPage = () => {
                   </Paper>
                 </Grid>
                 
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Paper sx={{ p: 3, borderRadius: 3, mt: 3 }}>
                     <Typography variant="h5" component="h2" gutterBottom>
                       System Information
                     </Typography>
                     
                     <Grid container spacing={2} sx={{ mt: 1 }}>
-                      <Grid item xs={12} md={4}>
+                      <Grid size={{ xs: 12, md: 4 }}>
                         <Typography variant="subtitle1" gutterBottom>Platform Version</Typography>
                         <Typography variant="body1">v2.5.0</Typography>
                       </Grid>
                       
-                      <Grid item xs={12} md={4}>
+                      <Grid size={{ xs: 12, md: 4 }}>
                         <Typography variant="subtitle1" gutterBottom>Last Updated</Typography>
                         <Typography variant="body1">May 5, 2025</Typography>
                       </Grid>
                       
-                      <Grid item xs={12} md={4}>
+                      <Grid size={{ xs: 12, md: 4 }}>
                         <Typography variant="subtitle1" gutterBottom>Database Status</Typography>
                         <Chip label="Healthy" color="success" />
                       </Grid>
                       
-                      <Grid item xs={12} sx={{ mt: 2 }}>
+                      <Grid size={12} sx={{ mt: 2 }}>
                         <Button
                           variant="outlined"
                           color="primary"
@@ -1201,7 +1202,7 @@ const AdminDashboardPage = () => {
         <DialogContent>
           {selectedUser && (
             <Grid container spacing={2} sx={{ mt: 1 }}>
-              <Grid item xs={12} display="flex" justifyContent="center">
+              <Grid size={12} display="flex" justifyContent="center">
                 <Avatar 
                   sx={{ 
                     width: 100, 
@@ -1214,7 +1215,7 @@ const AdminDashboardPage = () => {
                 </Avatar>
               </Grid>
               
-              <Grid item xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <TextField
                   fullWidth
                   label="Name"
@@ -1224,7 +1225,7 @@ const AdminDashboardPage = () => {
                 />
               </Grid>
               
-              <Grid item xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <TextField
                   fullWidth
                   label="Email"
@@ -1234,7 +1235,7 @@ const AdminDashboardPage = () => {
                 />
               </Grid>
               
-              <Grid item xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <TextField
                   fullWidth
                   label="Phone"
@@ -1244,7 +1245,7 @@ const AdminDashboardPage = () => {
                 />
               </Grid>
               
-              <Grid item xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <TextField
                   fullWidth
                   label="Join Date"
@@ -1254,7 +1255,7 @@ const AdminDashboardPage = () => {
                 />
               </Grid>
               
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <TextField
                   fullWidth
                   label="Address"
@@ -1264,7 +1265,7 @@ const AdminDashboardPage = () => {
                 />
               </Grid>
               
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <Box sx={{ display: 'flex', alignItems: 'center', mt: 2 }}>
                   <Typography variant="subtitle1" sx={{ mr: 2 }}>Status:</Typography>
                   <Chip                    label={selectedUser.status === "active" ? "Active" : "Inactive"} 
@@ -1274,7 +1275,7 @@ const AdminDashboardPage = () => {
               </Grid>
               
               {userTabValue === 0 && (
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Typography variant="subtitle1" gutterBottom>Donation Statistics:</Typography>
                   <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
                     <Box>
@@ -1294,7 +1295,7 @@ const AdminDashboardPage = () => {
               )}
               
               {userTabValue === 1 && (
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Typography variant="subtitle1" gutterBottom>Request Statistics:</Typography>
                   <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
                     <Box>
@@ -1335,7 +1336,7 @@ const AdminDashboardPage = () => {
         <DialogContent>
           {selectedDonation && (
             <Grid container spacing={2} sx={{ mt: 1 }}>
-              <Grid item xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <TextField
                   fullWidth
                   label="Food Name"
@@ -1345,7 +1346,7 @@ const AdminDashboardPage = () => {
                 />
               </Grid>
               
-              <Grid item xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <TextField
                   fullWidth
                   label="Donor"
@@ -1355,7 +1356,7 @@ const AdminDashboardPage = () => {
                 />
               </Grid>
               
-              <Grid item xs={12} md={4}>
+              <Grid size={{ xs: 12, md: 4 }}>
                 <TextField
                   fullWidth
                   label="Quantity"
@@ -1365,7 +1366,7 @@ const AdminDashboardPage = () => {
                 />
               </Grid>
               
-              <Grid item xs={12} md={4}>
+              <Grid size={{ xs: 12, md: 4 }}>
                 <TextField
                   fullWidth
                   label="Expiry Date"
@@ -1375,7 +1376,7 @@ const AdminDashboardPage = () => {
                 />
               </Grid>
               
-              <Grid item xs={12} md={4}>
+              <Grid size={{ xs: 12, md: 4 }}>
                 <TextField
                   fullWidth
                   label="Donation Date"
@@ -1385,7 +1386,7 @@ const AdminDashboardPage = () => {
                 />
               </Grid>
               
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <TextField
                   fullWidth
                   label="Description"
@@ -1397,7 +1398,7 @@ const AdminDashboardPage = () => {
                 />
               </Grid>
               
-              <Grid item xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <TextField
                   fullWidth
                   label="Pickup Location"
@@ -1407,7 +1408,7 @@ const AdminDashboardPage = () => {
                 />
               </Grid>
               
-              <Grid item xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <TextField
                   fullWidth
                   label="Pickup Time"
@@ -1417,7 +1418,7 @@ const AdminDashboardPage = () => {
                 />
               </Grid>
               
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <Box sx={{ display: 'flex', alignItems: 'center', mt: 2 }}>
                   <Typography variant="subtitle1" sx={{ mr: 2 }}>Status:</Typography>
                   <Chip 
@@ -1432,7 +1433,7 @@ const AdminDashboardPage = () => {
               </Grid>
               
               {selectedDonation.status === 'pending' && (
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Typography variant="subtitle1" gutterBottom>Admin Decision:</Typography>
                   <TextField
                     fullWidth

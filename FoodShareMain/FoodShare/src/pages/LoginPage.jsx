@@ -90,23 +90,38 @@ const LoginPage = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [serverError, setServerError] = useState('');
+  const [existingUser, setExistingUser] = useState(null);
   
   // Check if user is already logged in
   useEffect(() => {
     const userData = localStorage.getItem('user');
     if (userData) {
       const user = JSON.parse(userData);
-      
-      // Redirect based on user role
-      if (user.role === 'donor') {
+      setExistingUser(user);
+    }
+  }, []);
+  
+  // Handle logout for switching accounts
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('authToken');
+    setExistingUser(null);
+  };
+  
+  // Handle continue to dashboard
+  const handleContinueToDashboard = () => {
+    if (existingUser) {
+      if (existingUser.role === 'donor') {
         navigate('/donor');
-      } else if (user.role === 'beneficiary') {
+      } else if (existingUser.role === 'beneficiary') {
         navigate('/beneficiary');
-      } else if (user.role === 'admin') {
+      } else if (existingUser.role === 'admin') {
         navigate('/admin');
+      } else {
+        navigate('/');
       }
     }
-  }, [navigate]);
+  };
   
   // Handle input changes
   const handleChange = (e) => {
@@ -240,6 +255,36 @@ const LoginPage = () => {
             animate="visible"
           >
             <FormContainer>
+              {/* Show already logged in message or login form */}
+              {existingUser ? (
+                <Box sx={{ textAlign: 'center' }}>
+                  <Typography variant="h5" gutterBottom>
+                    Already Logged In
+                  </Typography>
+                  <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
+                    You are logged in as <strong>{existingUser.email || existingUser.username}</strong> ({existingUser.role})
+                  </Typography>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 3 }}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      fullWidth
+                      onClick={handleContinueToDashboard}
+                    >
+                      Continue to Dashboard
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      fullWidth
+                      onClick={handleLogout}
+                    >
+                      Logout & Use Different Account
+                    </Button>
+                  </Box>
+                </Box>
+              ) : (
+                <>
               <FormTitle variant="h4" component="h1">
                 Log In to FoodShare
               </FormTitle>
@@ -247,7 +292,7 @@ const LoginPage = () => {
               <Box component="form" onSubmit={handleSubmit} noValidate>
                 <Grid container spacing={3}>
                   {/* Email */}
-                  <Grid item xs={12}>
+                  <Grid size={12}>
                     <StyledTextField
                       name="email"
                       label="Email"
@@ -262,7 +307,7 @@ const LoginPage = () => {
                   </Grid>
                   
                   {/* Password */}
-                  <Grid item xs={12}>
+                  <Grid size={12}>
                     <StyledTextField
                       name="password"
                       label="Password"
@@ -277,7 +322,7 @@ const LoginPage = () => {
                   </Grid>
                   
                   {/* Submit Button */}
-                  <Grid item xs={12}>
+                  <Grid size={12}>
                     <Box textAlign="center">
                       <SubmitButton
                         type="submit"
@@ -291,7 +336,7 @@ const LoginPage = () => {
                   </Grid>
                   
                   {/* Register Link */}
-                  <Grid item xs={12}>
+                  <Grid size={12}>
                     <Box textAlign="center">                      <Typography variant="body2">
                         Don&apos;t have an account? <RegisterLink href="/register">Register</RegisterLink>
                       </Typography>
@@ -299,6 +344,8 @@ const LoginPage = () => {
                   </Grid>
                 </Grid>
               </Box>
+              </>
+              )}
             </FormContainer>
           </Box>
         </Container>

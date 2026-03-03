@@ -1,3 +1,6 @@
+/* FontAwesome import - must be at top */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
 /* This file contains app-specific styles */
 
 /* Ensure the app takes full height/width */
@@ -142,6 +145,3 @@ button {
 img {
   max-width: 100%;
 }
-
-/* Loading FontAwesome for social icons - fallback if your CDN import doesn't work */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
