@@ -36,6 +36,10 @@ export const env = {
    * @returns {boolean} True if in development mode
    */
   isDevelopment: () => {
+    // Use Vite's import.meta.env.MODE for accurate detection
+    if (typeof import.meta !== 'undefined' && import.meta.env) {
+      return import.meta.env.MODE === 'development' || import.meta.env.DEV === true;
+    }
     return env.get('NODE_ENV', 'development') === 'development';
   },
   
@@ -45,6 +49,10 @@ export const env = {
    * @returns {boolean} True if in production mode
    */
   isProduction: () => {
+    // Use Vite's import.meta.env.MODE for accurate detection
+    if (typeof import.meta !== 'undefined' && import.meta.env) {
+      return import.meta.env.MODE === 'production' || import.meta.env.PROD === true;
+    }
     return env.get('NODE_ENV') === 'production';
   },
   

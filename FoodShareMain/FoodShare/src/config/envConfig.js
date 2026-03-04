@@ -5,7 +5,8 @@
 import { env } from '../utils/environmentUtils';
 
 // Determine current environment
-const NODE_ENV = env.get('NODE_ENV', 'development');
+// In Vite, use import.meta.env.MODE which is 'production' in production builds
+const NODE_ENV = import.meta.env.MODE || env.get('NODE_ENV', 'development');
 
 // Environment Variables
 const ENV = {
