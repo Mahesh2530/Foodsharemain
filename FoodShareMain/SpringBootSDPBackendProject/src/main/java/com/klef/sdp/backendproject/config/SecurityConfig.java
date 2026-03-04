@@ -40,9 +40,11 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // Allow Vercel frontend and localhost for development
-        configuration.setAllowedOrigins(Arrays.asList(
+        // Allow Vercel frontend (all preview deployments) and localhost for development
+        configuration.setAllowedOriginPatterns(Arrays.asList(
             "https://foodsharemain.vercel.app",
+            "https://foodsharemain-*.vercel.app",
+            "https://*.vercel.app",
             "http://localhost:2025",
             "http://localhost:3000",
             "http://localhost:5173"
