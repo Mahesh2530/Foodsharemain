@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.klef.sdp.backendproject.SpringBootSdpBackendProjectApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.199 s <<< FAILURE! -- in com.klef.sdp.backendproject.SpringBootSdpBackendProjectApplicationTests
-com.klef.sdp.backendproject.SpringBootSdpBackendProjectApplicationTests -- Time elapsed: 0.199 s <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.350 s <<< FAILURE! -- in com.klef.sdp.backendproject.SpringBootSdpBackendProjectApplicationTests
+com.klef.sdp.backendproject.SpringBootSdpBackendProjectApplicationTests -- Time elapsed: 0.350 s <<< ERROR!
 java.lang.IllegalStateException: Found multiple @SpringBootConfiguration annotated classes [Generic bean: class [com.klef.sdp.backendproject.BackendProjectApplication]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodNames=null; destroyMethodNames=null; defined in file [C:\Users\Lenovo\Desktop\full FSAD\FoodShareMain\SpringBootSDPBackendProject\target\classes\com\klef\sdp\backendproject\BackendProjectApplication.class], Generic bean: class [com.klef.sdp.backendproject.SpringBootSdpBackendProjectApplication]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodNames=null; destroyMethodNames=null; defined in file [C:\Users\Lenovo\Desktop\full FSAD\FoodShareMain\SpringBootSDPBackendProject\target\classes\com\klef\sdp\backendproject\SpringBootSdpBackendProjectApplication.class]]
 	at org.springframework.util.Assert.state(Assert.java:97)
 	at org.springframework.boot.test.context.AnnotatedClassFinder.scanPackage(AnnotatedClassFinder.java:92)
