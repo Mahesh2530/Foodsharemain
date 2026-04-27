@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: foodsharemain-backend
+    runtime: java
+    buildCommand: "cd SpringBootSDPBackendProject && mvn clean package -DskipTests"
+    startCommand: "java -jar SpringBootSDPBackendProject/target/backendproject-0.0.1-SNAPSHOT.jar"
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_USER
+        sync: false
+      - key: DATABASE_PASSWORD
+        sync: false
+      - key: PORT
+        value: "8080"
