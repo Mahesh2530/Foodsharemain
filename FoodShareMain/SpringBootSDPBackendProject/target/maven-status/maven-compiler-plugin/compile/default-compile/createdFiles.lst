@@ -59,4 +59,5 @@ com\klef\sdp\backendproject\dto\AuditDonationResponseDTO.class
 com\klef\sdp\backendproject\dto\ImpactMetricsResponseDTO.class
 com\klef\sdp\backendproject\model\AuditLogs.class
 com\klef\sdp\backendproject\service\UserDonationService.class
+com\klef\sdp\backendproject\controller\HealthController.class
 com\klef\sdp\backendproject\repository\ImpactMetricsRepository.class

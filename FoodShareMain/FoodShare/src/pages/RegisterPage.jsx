@@ -208,11 +208,12 @@ const RegisterPage = () => {
       // Set success and redirect based on user role
       setSuccess(true);
       setTimeout(() => {
-        if (userData.role === 'donor') {
+        const role = userData.role?.toLowerCase();
+        if (role === 'donor') {
           navigate('/donor');
-        } else if (userData.role === 'beneficiary') {
+        } else if (role === 'beneficiary') {
           navigate('/beneficiary');
-        } else if (userData.role === 'admin') {
+        } else if (role === 'admin') {
           navigate('/admin');
         } else {
           navigate('/'); // Fallback to home if role is unknown

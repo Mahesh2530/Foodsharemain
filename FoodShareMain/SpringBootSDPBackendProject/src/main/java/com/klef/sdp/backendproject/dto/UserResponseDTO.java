@@ -1,7 +1,12 @@
 package com.klef.sdp.backendproject.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.LocalDateTime;
+
 public class UserResponseDTO {
+    @JsonProperty("user_id")
     private String userId;
+    
     private String username;
     private String email;
     private String role;
@@ -9,11 +14,22 @@ public class UserResponseDTO {
     private String address;
     private String city;
     private String state;
+    
+    @JsonProperty("postal_code")
     private String postalCode;
+    
     private String country;
     private Double latitude;
     private Double longitude;
+    
+    @JsonProperty("is_active")
     private Boolean isActive;
+    
+    @JsonProperty("created_at")
+    private LocalDateTime createdAt;
+    
+    @JsonProperty("updated_at")
+    private LocalDateTime updatedAt;
 
     // Getters and Setters
     public String getUserId() {
@@ -118,5 +134,21 @@ public class UserResponseDTO {
 
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

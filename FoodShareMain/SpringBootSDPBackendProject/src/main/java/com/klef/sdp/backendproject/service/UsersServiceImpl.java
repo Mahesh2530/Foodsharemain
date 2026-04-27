@@ -31,6 +31,8 @@ public class UsersServiceImpl implements UserService {
         dto.setLatitude(user.getLatitude());
         dto.setLongitude(user.getLongitude());
         dto.setIsActive(user.getIs_active());
+        dto.setCreatedAt(user.getCreated_at());
+        dto.setUpdatedAt(user.getUpdated_at());
         return dto;
     }
 

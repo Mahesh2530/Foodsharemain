@@ -111,11 +111,12 @@ const LoginPage = () => {
   // Handle continue to dashboard
   const handleContinueToDashboard = () => {
     if (existingUser) {
-      if (existingUser.role === 'donor') {
+      const role = existingUser.role?.toLowerCase();
+      if (role === 'donor') {
         navigate('/donor');
-      } else if (existingUser.role === 'beneficiary') {
+      } else if (role === 'beneficiary') {
         navigate('/beneficiary');
-      } else if (existingUser.role === 'admin') {
+      } else if (role === 'admin') {
         navigate('/admin');
       } else {
         navigate('/');
@@ -167,11 +168,12 @@ const LoginPage = () => {
         const userData = result.data;
         
         // Navigate to the appropriate dashboard based on user role
-        if (userData.role === 'donor') {
+        const role = userData.role?.toLowerCase();
+        if (role === 'donor') {
           navigate('/donor');
-        } else if (userData.role === 'beneficiary') {
+        } else if (role === 'beneficiary') {
           navigate('/beneficiary');
-        } else if (userData.role === 'admin') {
+        } else if (role === 'admin') {
           navigate('/admin');
         } else {
           navigate('/');

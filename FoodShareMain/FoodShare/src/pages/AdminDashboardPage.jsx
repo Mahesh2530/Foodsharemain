@@ -42,7 +42,8 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Chip
+  Chip,
+  Alert
 } from '@mui/material';
 import { 
   Home as HomeIcon,
@@ -114,9 +115,9 @@ const AdminDashboardPage = () => {
         const usersResponse = await axios.get(`${API_BASE_URL}/admin/users`);
         const users = usersResponse.data || [];
         
-        // Separate users into donors and beneficiaries
-        const donorsList = users.filter(user => user.role === 'donor');
-        const beneficiariesList = users.filter(user => user.role === 'beneficiary');
+        // Separate users into donors and beneficiaries (case-insensitive comparison)
+        const donorsList = users.filter(user => user.role?.toLowerCase() === 'donor');
+        const beneficiariesList = users.filter(user => user.role?.toLowerCase() === 'beneficiary');
         
         // Fetch donations
         const donationsResponse = await axios.get(`${API_BASE_URL}/donations`);
@@ -139,8 +140,8 @@ const AdminDashboardPage = () => {
         
         // Use mock users
         const mockUserList = mockUsers || [];
-        const donorsList = mockUserList.filter(user => user.role === 'donor');
-        const beneficiariesList = mockUserList.filter(user => user.role === 'beneficiary');
+        const donorsList = mockUserList.filter(user => user.role?.toLowerCase() === 'donor');
+        const beneficiariesList = mockUserList.filter(user => user.role?.toLowerCase() === 'beneficiary');
         
         setDonors(donorsList);
         setBeneficiaries(beneficiariesList);
@@ -315,22 +316,6 @@ const AdminDashboardPage = () => {
             Loading Admin Dashboard...
           </Typography>
           <LinearProgress color="primary" />
-        </Container>
-      </Box>
-    );
-  }
-  
-  // Render error state
-  if (error) {
-    return (
-      <Box sx={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-        <Container maxWidth="sm">
-          <Typography variant="h4" align="center" color="error" gutterBottom>
-            Error
-          </Typography>
-          <Typography variant="body1" align="center">
-            {error}
-          </Typography>
         </Container>
       </Box>
     );
@@ -519,6 +504,13 @@ const AdminDashboardPage = () => {
       {/* Main Content */}
       <Box component="main" sx={{ flexGrow: 1, p: 3, pt: { xs: 10, sm: 12 } }}>
         <Container maxWidth="lg">
+          {/* Error Alert */}
+          {error && (
+            <Alert severity="warning" sx={{ mb: 3 }}>
+              {error}
+            </Alert>
+          )}
+          
           {/* Dashboard Content */}
           <Box component={motion.div}
             initial={{ opacity: 0, y: 20 }}
